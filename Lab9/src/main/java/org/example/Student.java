@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 
-public class Student implements Serializable {
+public class Student implements Serializable, Comparable, Cloneable {
 	private double GPA;
 	private String name;
 	
@@ -16,7 +16,32 @@ public class Student implements Serializable {
 		name = n;
 		GPA = gpa;
 	}
-	
+
+	public Student(Student other) {
+		GPA = other.getGPA();
+		name = other.getName();
+	}
+	@Override
+	public Student clone() {
+		return new Student(this);
+	}
+
+	public double getGPA() {
+		return GPA;
+	}
+
+	public void setGPA(double GPA) {
+		this.GPA = GPA;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		writeObjectToFile();
 		Student a = readObjectFromFile();
@@ -44,4 +69,39 @@ public class Student implements Serializable {
 		os.close();		
 	}
 
+	/*
+	Positive if THIS is greater than parameter
+	Returns difference in GPA truncated to an int UNLESS difference is between 1 and -1
+	In that case, it will return 1 or -1 respectively
+	This is to ensure that a return value of 0 will always mean equal GPAs
+	The compareTo method in the Comparable interface returns an int
+	This is why I am forced to return an int here instead of a double
+	*/
+	@Override
+	public int compareTo(Object o) {
+		if (!(o instanceof Student)) {
+			return Integer.MAX_VALUE;
+		}
+		Student other = (Student) o;
+		double difference = GPA - other.GPA;
+		if (difference > 0) {
+			if (difference > 1) {
+				return (int) difference;
+			} else {
+				return 1;
+			}
+		} else if (difference < 0) {
+			if (difference < -1) {
+				return (int) difference;
+			} else {
+				return -1;
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Name: " + name + "\nGPA: " + GPA;
+	}
 }

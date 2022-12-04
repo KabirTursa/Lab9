@@ -33,8 +33,9 @@ public class Application extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-	    System.out.println("hi");
-	   }
+		System.out.println("actionPerformed is being called");
+
+	}
 	
 	//A one line main
 	public static void main(String[] args) {

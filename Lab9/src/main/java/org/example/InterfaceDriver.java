@@ -17,8 +17,8 @@ public class InterfaceDriver {
 
     //comment and uncomment the demo functions in main to test
     public static void main(String[] args) {
-        //comparableDemo();
-        //loneableDemo();
+        comparableDemo();
+        cloneableDemo();
         serializableDemo();
         actionListenerDemo();
     }
@@ -70,7 +70,7 @@ public class InterfaceDriver {
     
         
     }
-/*
+
     public static void comparableDemo() {
         Student a = new Student("Rob", 3.0);
         Student b = new Student("Bill", 4.0);
@@ -85,8 +85,9 @@ public class InterfaceDriver {
     
     public static void cloneableDemo() {
         Student a = new Student("Evan", 3.0);
+
         Student c = (Student)a.clone();
-        
+
         System.out.println(a);
         System.out.println(c);
         
@@ -99,6 +100,6 @@ public class InterfaceDriver {
         System.out.println(" The object a: " + a);  
         System.out.println(" The object c: " + c);  
     }
-    */
+
     
 }
